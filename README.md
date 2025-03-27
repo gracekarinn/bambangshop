@@ -93,4 +93,19 @@ Menurut saya, implementasi yang ada saat ini sudah cukup baik dalam menjaga flek
 
 #### Reflection Publisher-2
 
+#### 1. Mengapa perlu memisahkan Service dan Repository dari Model?
+Dalam desain MVC klasik, Model mencakup data dan business logic. Namun, dengan memisahkan Service dan Repository, kita bisa menjaga kode tetap bersih dan mudah dipahami. Repository bertanggung jawab atas akses data (misalnya, mengambil dan menyimpan ke database), sedangkan Service menangani business logic. Pemisahan ini membantu menjaga Model tetap ringan dan fokus pada struktur data, serta membuat kode lebih mudah diuji dan dikelola.
+
+#### 2. Apa yang terjadi jika hanya menggunakan Model?
+Jika kita hanya menggunakan Model tanpa Service dan Repository, maka setiap Model harus menangani business logic dan akses data secara langsung. Misalnya, `Program`, `Subscriber`, dan `Notification` akan saling berinteraksi langsung dalam satu tempat yang membuat kode menjadi kompleks dan no clean code. Dengan pemisahan yang baik, perubahan dalam logika bisnis atau penyimpanan data tidak akan memengaruhi bagian lain dari aplikasi secara langsung.
+
+#### 3. Pengalaman menggunakan Postman untuk pengujian
+Postman adalah alat yang sangat membantu dalam menguji API yang sedang dikembangkan. Dengan Postman, kita bisa mengirim request HTTP dengan berbagai metode seperti GET, POST, PUT, dan DELETE untuk memastikan API bekerja dengan benar. Fiturnya antara lain adalah:
+- **Collections**: Memudahkan penyimpanan dan pengelompokan request.
+- **Environment Variables**: Berguna untuk menyimpan konfigurasi API agar tidak perlu diubah manual setiap saat.
+- **Automated Testing**: Bisa menulis skrip untuk mengotomatiskan pengujian API.
+- **Mock Servers**: Bisa mensimulasikan respons API tanpa harus menjalankan backend secara penuh.
+
+I love postman but I prefer curl
+
 #### Reflection Publisher-3
