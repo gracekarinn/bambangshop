@@ -109,3 +109,12 @@ Postman adalah alat yang sangat membantu dalam menguji API yang sedang dikembang
 I love postman but I prefer curl
 
 #### Reflection Publisher-3
+
+#### 1. Variasi Observer Pattern yang digunakan
+Dalam implementasi BambangShop, kita menggunakan **Push Model**, di mana publisher secara langsung mengirim data ke semua subscriber setelah suatu peristiwa terjadi. Contohnya, ketika produk baru dibuat atau diperbarui, notifikasi langsung dikirim ke subscriber tanpa harus mereka meminta data terlebih dahulu.
+
+#### 2. Kelebihan dan Kekurangan Pull Model
+Jika kita menggunakan **Pull Model**, subscriber akan secara berkala mengecek ke publisher apakah ada perubahan. Kelebihan dari pendekatan ini adalah subscriber hanya mengambil data yang mereka butuhkan, mengurangi jumlah data yang dikirim. Namun, kekurangannya adalah dapat menyebabkan polling berlebihan dan menambah beban server, terutama jika jumlah subscriber sangat banyak.
+
+#### 3. Dampak jika tidak menggunakan Multi-threading
+Saat ini, proses notifikasi berjalan dalam thread terpisah agar pengiriman ke setiap subscriber tidak menghambat eksekusi main program. Jika kita menghilangkan multi-threading, setiap notifikasi harus dikirim satu per satu dalam urutan yang sama dengan eksekusi utama. Ini akan membuat program menjadi lambat, terutama jika banyak subscriber yang harus diberi tau. 
