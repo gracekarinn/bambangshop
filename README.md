@@ -78,6 +78,19 @@ This is the place for you to write reflections:
 
 #### Reflection Publisher-1
 
+#### 1. Apakah perlu menggunakan interface atau cukup satu struct?
+
+Dalam pola desain Observer, penggunaan interface atau trait sangat penting untuk memastikan semua subscriber memiliki perilaku yang seragam. Jika di BambangShop kita hanya menggunakan satu struct `Subscriber` tanpa trait, maka akan sulit jika ingin menambahkan jenis subscriber lain dengan cara kerja yang berbeda. Dengan trait, kita dapat menentukan bahwa setiap subscriber harus memiliki metode tertentu, seperti `notify()`. Oleh karena itu, meskipun saat ini cukup dengan satu struct, penggunaan trait tetap lebih baik untuk fleksibilitas dan project yang makin kompleks.
+
+#### 2. Apakah Vec cukup atau perlu menggunakan DashMap?
+`id` dalam `Program` dan `url` dalam `Subscriber` harus bersifat unik. Jika menggunakan `Vec`, pencarian subscriber berdasarkan `url` akan menjadi lambat karena harus dicek satu per satu (O(n)). Dengan `DashMap`, pencarian lebih cepat (O(1)) karena berbasis hash map. Selain itu, `DashMap` juga mendukung akses yang aman dalam lingkungan multithreading sehingga tidak perlu takit akan konflik data. Penggunaan `DashMap` lebih efisien dan lebih cocok untuk kasus ini dibandingkan `Vec`.
+
+
+#### 3. Lebih baik menggunakan DashMap atau Singleton?
+Rust memiliki aturan ketat untuk memastikan program aman dalam lingkungan multithreading. Saat ini, kita menggunakan `DashMap` untuk memastikan bahwa `SUBSCRIBERS` dapat diakses oleh banyak thread tanpa masalah. Jika menggunakan Singleton, kita tetap memerlukan `Mutex` atau `RwLock` untuk mengatur akses, yang dapat membuat implementasi lebih kompleks dan memperlambat eksekusi. `DashMap` sudah menangani semua ini secara otomatis sehingga lebih sederhana dan tetap cepat. Oleh karena itu, lebih baik tetap menggunakan `DashMap` daripada Singleton.
+
+Menurut saya, implementasi yang ada saat ini sudah cukup baik dalam menjaga fleksibilitas, efisiensi, dan keamanan akses data dalam sistem yang berjalan secara bersamaan (multithreading).
+
 #### Reflection Publisher-2
 
 #### Reflection Publisher-3
